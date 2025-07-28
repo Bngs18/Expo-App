@@ -1,16 +1,19 @@
 import { ImageSourcePropType, View } from "react-native";
 import { Image } from "expo-image";
+import Animated from "react-native-reanimated";
 
 type Props = {
     imageSize: number;
-    imgSource: ImageSourcePropType;
+    stickerSource: ImageSourcePropType;
 };
 
-const EmojiSticker = ({ imageSize, imgSource }: Props) => {
+const EmojiSticker = ({ imageSize, stickerSource }: Props) => {
     return (
-        <View style={{ top: -250 }}>
-            <Image source={imgSource} style={{ width: imageSize, height: imageSize }}/>
-        </View>
+        <Animated.Image
+            source={stickerSource}
+            resizeMode={"contain"}
+            style={{ width: imageSize, height: imageSize }}
+        />
     )
 }
 

@@ -7,6 +7,8 @@ import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
 import EmojiPicker from "@/components/EmojiPicker";
 import EmojiList from "@/components/EmojiList";
+import EmojiSticker from "@/components/EmojiSticker";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 
 const PlaceholderImage = require('@/assets/images/background-image.png');
@@ -15,7 +17,7 @@ const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalIsVisible, setModalIsVisible] = useState<boolean>(false);
-  const [PickerEmoji, setPickerEmoji] = useState<ImageSourcePropType | undefined>(undefined);
+  const [pickerEmoji, setPickerEmoji] = useState<ImageSourcePropType | undefined>(undefined);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -45,13 +47,14 @@ const Index = () => {
   }
 
   const onSaveImageAsync = async () => {
-    //TODO: be it implemented this later
+    //*TODO: be it will implemented this later
   }
 
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
           <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage}/>
+          {pickerEmoji && <EmojiSticker imageSize={40} stickerSource={pickerEmoji} />}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
@@ -70,7 +73,7 @@ const Index = () => {
       <EmojiPicker isVisible={isModalIsVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickerEmoji} onCloseModal={onModalClose} />
       </EmojiPicker>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
